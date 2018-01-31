@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Book Face</title>
+</head>
+<body>
+	<div align="right">
+      		Please click here to <button id="viewAddAuthor"> Sign In </button> 
+  	</div> 
+
+  <h1 align="center">Book Face</h1>  
+  <table border='' width="1200" align="center">
+  	<tr>
+  		<th width="30%">Author</th>
+  		<th width="40%">Description</th>
+  		<th width="30%">Action</th>
+  	<tr>
+  <%
+  	for(var i=0; i<authors.length; i++) {%>
+  	<tr>
+      		<td><%= authors[i].name %></td>
+      		<td><%= authors[i].desc %></td>
+      		<td align="center"><button id="readAuthor" onclick="readAuthor('<%= authors[i].name %>')">View</button></td>
+    	</tr>
+  <% } %>
+  </table>
+  <br/> <br/> <br/>
+  <div align="Center">
+  	<button onclick="addAuthor()">Add Author</button>
+      
+  </div> 
+  
+  <script src="main.js"></script>
+
+  <!--<form action="/quot
+  
+  
+  
+  <div>
+    <h2>Delete Darth Vadar's first quote</h2>
+    <button id="delete"> Delete first Darth Vadar quote </button>
+  </div>
+ <script src="main.js"></script>-->
+</body>
+</html>

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Book Face</title>
+</head>
+<body>
+<div align="right">
+      		Please click here to <button id="viewAddAuthor"> Sign In </button> 
+  	</div> 
+
+  <h1 align="center">Book Face</h1>
+  <h2 align="center">Create Author</h2>
+  <table align="center" width="500px">
+  	<form action="/authors" method="POST">
+  	<tr>
+  		<td width="30%">Name</td>
+  		<% if ((typeof(author) !== 'undefined') && (author!== null)) {%>
+  			<td width="70%"><input type="text" value="<%=author.name%>" name="name" width="300px" disabled></td>
+  		<% }else{ %>
+  			<td width="70%"><input type="text" placeholder="Author's Name" name="name" width="300px"></td>
+  		<% } %>
+  	</tr>
+  	<tr>
+	  	<td>Description</td>
+	  	<% if ((typeof(author) !== 'undefined') && (author!== null)) {%>
+			<td><input type="text" value="<%=author.desc%>" name="desc" width="300px" disabled></td>
+		 <% }else{ %>
+		  	<td><input type="text" placeholder="Please describe this author" name="desc" width="300px"></td>
+  		<% } %>
+	  	
+  	</tr>
+  	<tr>
+		 <td></td>
+		 <% if ((typeof(author) !== 'undefined') && (author!== null)) {%>
+		 	<td></td>
+		 <% }else{ %>
+		 	<td><button type="submit">Submit</button></td>
+  		<% } %>
+		 
+  	</tr>
+  	</form>
+  </table>
+  
+  <div align="center">
+     <button onclick="listAuthor()">Cancel</button>
+  </div> 
+ <script src="main.js"></script>
+</body>
+</html>
