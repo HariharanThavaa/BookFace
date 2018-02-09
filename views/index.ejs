@@ -6,41 +6,45 @@
 </head>
 <body>
 	<div align="right">
-      		Please click here to <button id="viewAddAuthor"> Sign In </button> 
+		<%if(username === ''){%>
+			Please click here to <button id="viewAddAuthor" onclick="gotologinscreen()"> Sign In </button> 
+		<%}else{%>
+			Hello <%=username%>, Welcome to Bookface, <button id="viewAddAuthor" onclick="signout()"> Sign out </button>
+		<%}%>
   	</div> 
 
-  <h1 align="center">Book Face</h1>  
+  <h1 align="center">Bookface</h1> 
   <table border='' width="1200" align="center">
   	<tr>
   		<th width="30%">Author</th>
   		<th width="40%">Description</th>
   		<th width="30%">Action</th>
-  	<tr>
+  	</tr>
   <%
   	for(var i=0; i<authors.length; i++) {%>
   	<tr>
       		<td><%= authors[i].name %></td>
       		<td><%= authors[i].desc %></td>
-      		<td align="center"><button id="readAuthor" onclick="readAuthor('<%= authors[i].name %>')">View</button></td>
+      		<td align="center">
+      			<%if(mail === 'bookfacethava@gmail.com'){%>
+      				<button id="readAuthor" onclick="readAuthor('<%= authors[i]._id %>')">View Books</button>
+      				<button id="updateAuthor" onclick="updateAuthor('<%= authors[i]._id %>')">Edit</button>
+      				<button id="deleteAuthor" onclick="deleteAuthor('<%= authors[i]._id %>')">Delete</button>
+      			<%}else{%>
+      				<button id="readAuthor" onclick="readAuthor('<%= authors[i]._id %>')">View Books</button>      			
+      			<%}%>
+      			
+      			
+      		</td>
     	</tr>
   <% } %>
   </table>
   <br/> <br/> <br/>
   <div align="Center">
-  	<button onclick="addAuthor()">Add Author</button>
+  	<button onclick="createAuthor('<%= username %>')">Create New Author</button>
       
   </div> 
   
   <script src="main.js"></script>
-
-  <!--<form action="/quot
-  
-  
-  
-  <div>
-    <h2>Delete Darth Vadar's first quote</h2>
-    <button id="delete"> Delete first Darth Vadar quote </button>
-  </div>
- <script src="main.js"></script>-->
 </body>
 </html>

@@ -5,45 +5,89 @@
   <title>Book Face</title>
 </head>
 <body>
-<div align="right">
-      		Please click here to <button id="viewAddAuthor"> Sign In </button> 
+	<div align="right">
+		<%if(username === ''){%>
+			Please click here to <button id="viewAddAuthor" onclick="gotologinscreen()"> Sign In </button> 
+		<%}else{%>
+			Hello <%=username%>, Welcome to Bookface, <button id="viewAddAuthor" onclick="signout()"> Sign out </button>
+		<%}%>
   	</div> 
-
-  <h1 align="center">Book Face</h1>
-  <h2 align="center">Create Author</h2>
+  <h1 align="center">Bookface</h1> 
+  <h2 align="center"><%=type%> Author</h2>
   <table align="center" width="500px">
   	<form action="/authors" method="POST">
   	<tr>
   		<td width="30%">Name</td>
-  		<% if ((typeof(author) !== 'undefined') && (author!== null)) {%>
-  			<td width="70%"><input type="text" value="<%=author.name%>" name="name" width="300px" disabled></td>
-  		<% }else{ %>
-  			<td width="70%"><input type="text" placeholder="Author's Name" name="name" width="300px"></td>
+  		<%if(type == 'Create'){%>
+  			<td width="70%"><input id="txtAuthorName" type="text" placeholder="Author's Name" name="name" width="300px"></td>
+  		<%}else if(type == 'Update') {%>
+  			<td width="70%"><input id="txtAuthorName" type="text" value="<%=author.name%>" name="name" width="300px"></td>
+  		<%}else if(type == 'Read') {%>
+  			<td width="70%"><input id="txtAuthorName" type="text" value="<%=author.name%>" name="name" width="300px" disabled></td>
   		<% } %>
   	</tr>
   	<tr>
 	  	<td>Description</td>
-	  	<% if ((typeof(author) !== 'undefined') && (author!== null)) {%>
-			<td><input type="text" value="<%=author.desc%>" name="desc" width="300px" disabled></td>
-		 <% }else{ %>
-		  	<td><input type="text" placeholder="Please describe this author" name="desc" width="300px"></td>
+	  	<%if(type == 'Create'){%>
+			<td><input id="txtAuthorDesc" type="text" placeholder="Please describe this author" name="desc" width="300px"></td>
+		<%}else if(type == 'Update') {%>
+			<td><input id="txtAuthorDesc" type="text" value="<%=author.desc%>" name="desc" width="300px"></td>
+		<%}else if(type == 'Read') {%>
+			<td><input id="txtAuthorDesc" type="text" value="<%=author.desc%>" name="desc" width="300px" disabled ></td>
   		<% } %>
 	  	
   	</tr>
   	<tr>
-		 <td></td>
-		 <% if ((typeof(author) !== 'undefined') && (author!== null)) {%>
-		 	<td></td>
-		 <% }else{ %>
-		 	<td><button type="submit">Submit</button></td>
-  		<% } %>
-		 
+		 <td>
+		 	<%if(type !== 'Create'){%>
+		 		<input id="txtAuthorId" type="hidden" value="<%=author._id%>" width="300px" ></td>
+		 	<%}%>
+		 	
+		 <td></td>		 
   	</tr>
   	</form>
   </table>
+  <!--Book Table Starts here -->
+  <%if(type == 'Read'){%>
+  	<table border='' width="1200" align="center">
+	  	<tr>
+	  		<th width="30%">Book</th>
+	  		<th width="40%">Description</th>
+	  		<th width="30%">Action</th>
+	  	<tr>
+	  <%
+	  	for(var i=0; i<books.length; i++) {%>
+	  	<tr>
+	      		<td><%= books[i].name %></td>
+	      		<td><%= books[i].desc %></td>
+	      		<td align="center">
+	      			<%if(mail === 'bookfacethava@gmail.com'){%>
+	      				<button id="readBook" onclick="readBook('<%= books[i]._id %>')">View Books</button>
+					<button id="updateAuthor" onclick="updateBook('<%= books[i]._id %>')">Edit Book</button>
+	      				<button id="deleteBook" onclick="deleteBook('<%= books[i]._id %>')">Delete Book</button>
+				<%}else{%>
+					<button id="readBook" onclick="readBook('<%= books[i]._id %>')">View Books</button>	
+				<%}%>
+	      			
+	      			
+	      		</td>
+	    	</tr>
+	  <% } %>
+	  </table>	      
+  </div> 
   
+  <%}%>
+  <br/> 
+  <!--Book Table Ends  Here -->
   <div align="center">
-     <button onclick="listAuthor()">Cancel</button>
+  	<%if(type == 'Create'){%>
+	     	<button onclick="addAuthor()">Add</button>
+     	<%}else if(type == 'Update') {%>
+     		<button onclick="editAuthor()">Edit</button>
+     	<%}else if(type == 'Read'){%>
+     		<button onclick="createBook('<%=author._id%>', '<%=author.name%>','<%= username %>')">Create New Book</button>
+     	<%}%>
+     	<button onclick="listAuthor()">Cancel</button>
   </div> 
  <script src="main.js"></script>
 </body>
