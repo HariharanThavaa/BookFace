@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Book Face</title>
+</head>
+<body>
+	<div align="right">
+		<%if(username === ''){%>
+			Please click here to <button id="viewAddAuthor" onclick="gotologinscreen()"> Sign In </button> 
+		<%}else{%>
+			Hello <%=username%>, Welcome to Bookface, <button id="viewAddAuthor" onclick="signout()"> Sign out </button>
+		<%}%>
+  	</div> 
+  <h1 align="center">Bookface</h1> 
+  <h2 align="center"><%=type%> Book</h2>
+  <table align="center" width="500px">
+  	<form action="/books" method="POST">
+  	<tr>
+  		<td width="30%">Name</td>
+  		<%if(type == 'Create'){%>
+  			<td width="70%"><input id="txtBookName" type="text" placeholder="Book's Name" name="name" width="300px"></td>
+  		<%}else if(type == 'Update') {%>
+  			<td width="70%"><input id="txtBookName" type="text" value="<%=book.name%>" name="name" width="300px"></td>
+  		<%}else if(type == 'Read') {%>
+  			<td width="70%"><input id="txtBookName" type="text" value="<%=book.name%>" name="name" width="300px" disabled></td>
+  		<% } %>
+  	</tr>
+  	<tr>
+	  	<td>Description</td>
+	  	<%if(type == 'Create'){%>
+			<td><input id="txtBookDesc" type="text" placeholder="Please describe this book" name="desc" width="300px"></td>
+		<%}else if(type == 'Update') {%>
+			<td><input id="txtBookDesc" type="text" value="<%=book.desc%>" name="desc" width="300px"></td>
+		<%}else if(type == 'Read') {%>
+			<td><input id="txtBookDesc" type="text" value="<%=book.desc%>" name="desc" width="300px" disabled ></td>
+  		<% } %>
+	  	
+  	</tr>
+  	<tr>
+  		<td>Author Name</td>	
+  		<td>
+  			<input id="txtAuthorName" type="text" value="<%= auth_name %>" name="authorName" width="300px" disabled >
+  			<input id="txtAuthorId" type="hidden" value="<%= auth_id %>" name="authorId" width="300px" disabled >
+  		</td>
+  	</tr>
+  	<tr>
+		 <td>
+		 	<%if(type !== 'Create'){%>
+		 		<input id="txtBookId" type="hidden" value="<%=book._id%>" width="300px" ></td>
+		 	<%}%>
+		 	
+		 <td></td>		 
+  	</tr>
+  	</form>
+  </table>
+  <!--Book Table Starts here -->
+  <%if(type == 'Read'){%>
+  	<table border='' width="1200" align="center">
+	  	<tr>
+	  		<th width="80%">Comments</th>
+	  		<th width="20%">Action</th>
+	  	<tr>
+	  <%
+	  	for(var i=0; i<comments.length; i++) {%>
+	  	<tr>
+	      		<td><textarea rows="4" cols="150" disabled><%= comments[i].comment %></textarea></td>
+	      		<td align="center">
+	      			<%if(mail === 'bookfacethava@gmail.com'){%>
+	      				<button id="deleteComment" onclick="deleteComment('<%= comments[i]._id %>')">Delete</button>					
+				<%}%>
+	      			
+	      		</td>
+	    	</tr>
+	  <% } %>
+	  	<tr>
+	  		<td>
+	  			<textarea rows="4" cols="150" id="txtComment"></textarea>
+			</td>
+			<td align="center"><button onclick="addComment('<%= username %>')">comment</button></td>
+		</tr>
+	  </table>	      
+  </div> 
+  
+  <%}%>
+  <br/> 
+  <!--Book Table Ends  Here -->
+  <div align="center">
+  	<%if(type == 'Create'){%>
+	     	<button onclick="addBook()">Add Book</button>
+     	<%}else if(type == 'Update') {%>
+     		<button onclick="editBook()">Edit Book</button>     		
+     	<%}%>
+     	<button onclick="listBook()">Cancel</button>
+  </div> 
+ <script src="main.js"></script>
+</body>
+</html>
