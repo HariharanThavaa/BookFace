@@ -1,6 +1,80 @@
-install an configure notes.
+1. install Git to your machine
 
-Extract the Bookface.zip in your machine.
+go to https://www.atlassian.com/git/tutorials/install-git#windows
+
+follow the instructions to install git in your machine.
+
+
+2. Clone the  Repository using Git Bash
+git clone https://github.com/BBK-DCSIS-CBSD-2017-18/coursework-two-programming-using-node-js-HariharanThavaa.git
+
+In this this course work I have used express and mongodb for implementation.
+
+Express is a framework for building web applications on top of Node.js. It simplifies the server creation process that is already available in Node. In case you were wondering, Node allows you to use JavaScript as your server-side language.
+
+MongoDB is a database. This is the place where you store information for your web websites (or applications).
+
+navigate downloaded folder using command prompt
+cd I:\Hari\cbsd-coursework\coursework-two-programming-using-node-js-HariharanThavaa
+
+Ensure node.js availablity by typing below command 
+node -v 
+if node available you will get version details as v6.11.2 else please install node.js
+
+Once you navigate into it, run
+npm init
+
+give the name as bookface and just hit enter through everything that appears.
+
+This command creates package.json
+
+
+Now we have to install express. All you have to do is run below command
+npm install express --save
+
+Install Nodemon - Nodemon restarts the server automatically whenever you save the file
+npm install nodemon --save-dev
+
+goto Package.json file replace 
+"scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  }
+  
+ with
+ "scripts": {
+     "dev": "nodemon server.js"
+  }
+
+Install body-parser to parse the values from client to server
+npm install body-parser --save
+
+Install Mongo DB
+npm install mongodb --save
+
+In this course work I have created Mongo data base Mongo Atlas cloud repository and used it to store the data
+
+In this course work I used Embedded Javascript as my template engine. Install ejs
+npm install ejs --save
+
+In order track user information we need npm install node-session
+npm install node-session
+and 
+npm install client-sessions
+
+Finally user authentication is done by the mail we need nodemailer
+
+In order to do session management I have used the 
+npm install nodemailer
+
+Inorder to start the server run below command
+npm run dev
+
+Ref : https://zellwk.com/blog/crud-express-mongodb/
+
+Ref:https://www.w3schools.com/nodejs/nodejs_email.asp
+
+Ref: https://stormpath.com/blog/everything-you-ever-wanted-to-know-about-node-dot-js-sessions
 
 navigate to that folder in command prompt.
 
@@ -11,7 +85,7 @@ which start the server on localhost 3000
 Then open your browser and browse http://localhost:3000/
 
 
-adminsistrator account.
+adminsistrator gmail account created for testing purpose 
 user: 'bookfacethava@gmail.com',
 pass: 'test@cbsd'
 
@@ -37,7 +111,9 @@ Comment - R
 How to sign in?
 Top left corner there is a button to signup
 that will open the sign up window
-type your screen name and mail id and submit
+screen name : Admin
+mail id : bookfacethava@gmail.com
+and click sendmail button
 You will receive an email to your given mail account
 click the link on the mail
 You will be redirected to the application with welcome message.
